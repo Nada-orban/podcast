@@ -24,6 +24,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TextField from '@mui/material/TextField';
+import ListSubheader from '@mui/material/ListSubheader';
+import Link from 'next/link'
 
 const drawerWidth = 240;
 
@@ -41,41 +43,53 @@ function Nav(props, { children }) {
             <Divider />
             <List>
                 <ListItem >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItemButton>
+                    <Link href="#home">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Home" />
+                        </ListItemButton>
+                    </Link>
                 </ListItem>
                 <ListItem >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <RocketLaunchIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Discover" />
-                    </ListItemButton>
+                    <Link href="#discover">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <RocketLaunchIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Discover" />
+                        </ListItemButton>
+                    </Link>
                 </ListItem>
 
 
             </List>
-            <Divider />
-            <List>
+
+            <List subheader={
+                <ListSubheader component="div" id="nested-list-subheader" sx={{ bgcolor: 'primary.main', color: "text.primary", }}>
+                    YOUR STUFF
+                </ListSubheader>
+            }>
                 <ListItem >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <GridViewIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="My Podcast" />
-                    </ListItemButton>
+                    <Link href="#myPodcast">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <GridViewIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="My Podcast" />
+                        </ListItemButton>
+                    </Link>
                 </ListItem>
                 <ListItem >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AccessTimeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Recents" />
-                    </ListItemButton>
+                    <Link href="#recents">
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AccessTimeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Recents" />
+                        </ListItemButton>
+                    </Link>
                 </ListItem>
             </List>
         </div>

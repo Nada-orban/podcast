@@ -31,7 +31,7 @@ export const themeSettongs = (mode) => {
                     blue: blue[900],
                 },
                 background: {
-                    main: indigo[900],
+                    main: "hsl(238,27%,12%)",
                     // main: "rgb(52, 71, 103)",
                 },
                 text: {

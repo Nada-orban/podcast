@@ -15,6 +15,9 @@ export default function App({ Component, pageProps }) {
         <CssBaseline />
         <Nav>
           <Component {...pageProps} />
+          <style jsx global>{`
+                    ${theme.palette.mode === 'dark' ? "body{background:hsl(238,27%,12%)} " : "body{background: rgb(248, 249, 250)} "}`
+          }</style>
         </Nav>
       </ThemeProvider>
     </ColorModeContext.Provider>
