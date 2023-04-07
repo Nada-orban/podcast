@@ -26,11 +26,15 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TextField from '@mui/material/TextField';
 import ListSubheader from '@mui/material/ListSubheader';
 import Link from 'next/link'
+import { useTheme } from '@mui/material/styles';
+import { ColorModeContext } from '../public/theme'
 
 const drawerWidth = 240;
 
-function Nav(props, { children }) {
-    const { window } = props;
+function Nav({ children }) {
+    const theme = useTheme();
+    const colorMode = React.useContext(ColorModeContext);
+    // const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
@@ -40,10 +44,10 @@ function Nav(props, { children }) {
     const drawer = (
         <div>
             <Toolbar />
-            <Divider />
+
             <List>
                 <ListItem >
-                    <Link href="#home">
+                    <Link href="/">
                         <ListItemButton>
                             <ListItemIcon>
                                 <HomeIcon />
@@ -53,7 +57,7 @@ function Nav(props, { children }) {
                     </Link>
                 </ListItem>
                 <ListItem >
-                    <Link href="#discover">
+                    <Link href="/discover">
                         <ListItemButton>
                             <ListItemIcon>
                                 <RocketLaunchIcon />
@@ -67,12 +71,12 @@ function Nav(props, { children }) {
             </List>
 
             <List subheader={
-                <ListSubheader component="div" id="nested-list-subheader" sx={{ bgcolor: 'primary.main', color: "text.primary", }}>
+                <ListSubheader component="div" id="nested-list-subheader" sx={{ color: "text.primary", }}>
                     YOUR STUFF
                 </ListSubheader>
             }>
                 <ListItem >
-                    <Link href="#myPodcast">
+                    <Link href="/myPodcast">
                         <ListItemButton>
                             <ListItemIcon>
                                 <GridViewIcon />
@@ -82,7 +86,7 @@ function Nav(props, { children }) {
                     </Link>
                 </ListItem>
                 <ListItem >
-                    <Link href="#recents">
+                    <Link href="/recents">
                         <ListItemButton>
                             <ListItemIcon>
                                 <AccessTimeIcon />
@@ -95,7 +99,7 @@ function Nav(props, { children }) {
         </div>
     );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    // const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -105,7 +109,7 @@ function Nav(props, { children }) {
                 className={styles.card} variant="permanent"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    ml: { sm: `${drawerWidth}px` }, backgroundColor: "background.main"
                 }}
             >
                 <Toolbar>
@@ -119,13 +123,16 @@ function Nav(props, { children }) {
                         <MenuIcon />
                     </IconButton>
 
-                    <Box display="flex">
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
                         <IconButton><ChevronLeftIcon /></IconButton>
                         <IconButton><ChevronRightIcon /></IconButton>
                     </Box>
                     <TextField fullWidth id="outlined-basic" label="Search" display="flex" type="search" sx={{ borderRadius: "10px", mx: "30px" }} />
-                    <button className={styles.buttonstyle}>Login</button>
-                    <button className={styles.buttonstyle}>Signup</button>
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                        <button className={styles.buttonstyle} >Login</button>
+                        <button className={styles.buttonstyle}>Signup</button>
+                    </Box>
+
 
 
 
@@ -138,7 +145,8 @@ function Nav(props, { children }) {
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
-                    container={container}
+                    // container={container}
+
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
@@ -147,7 +155,7 @@ function Nav(props, { children }) {
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }, backgroundColor: "background.main"
                     }}
                 >
                     {drawer}
@@ -156,7 +164,7 @@ function Nav(props, { children }) {
                     variant="permanent"
                     sx={{
                         display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }, backgroundColor: "background.main"
                     }}
                     open
                 >
@@ -165,17 +173,20 @@ function Nav(props, { children }) {
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{
+                    flexGrow: 1, py: 3, backgroundColor: "background.main", color: "text.primary", width: { sm: `calc(100% - ${drawerWidth}px)` }
+                }}
             >
                 <Toolbar />
-                <main >{children}</main>
+                <main>{children}</main>
+
             </Box>
         </Box>
     );
 }
-Nav.propTypes = {
+// Nav.propTypes = {
 
-    window: PropTypes.func,
-};
+//     window: PropTypes.func,
+// };
 
 export default Nav
